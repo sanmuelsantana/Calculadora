@@ -1,4 +1,4 @@
-class calc {
+class Calculator {
     constructor() {
         this.numVisor = '0';
         this.memoriaTemp = '';
@@ -7,6 +7,7 @@ class calc {
         this.ptDecimal = false;
         this.memoria = 0;
         this.op = {
+            NOP: 0,
             SUM: 1,
             SUB: 2,
             MULT: 3, 
@@ -31,7 +32,7 @@ class calc {
         if (this.errorState) return;
         if (dig.length != 1) return;
         if ((dig < '0' || dig > '9') && dig != '.') return;
-        if (!this.secondStart && this.opAtual != this.op.NOP) {
+        if (!this.secondStart && this.atualOp !== this.op.NOP) {
             this.secondStart = true;
             this.ptDecimal = false;
             this.numVisor = '0';
@@ -46,7 +47,7 @@ class calc {
         } else {
             this.numVisor += dig;
         }
-
+        updateView(); // Update the view after inserting a digit
     }
 
     defineOperation(op){
@@ -77,38 +78,42 @@ class calc {
                 this.percentage();
                 break;
         }
-        this.memoriaTemp = this.showVisor;
+        this.memoriaTemp = this.numVisor;
     }
 
     invertSign() {
         if (this.errorState) return;
         let number = parseFloat(this.numVisor);
         this.numVisor = (-number).toString();
+        updateView(); // Update the view after inverting sign
     }
 
     square() {
         if (this.errorState) return;
         let number = parseFloat(this.numVisor);
         this.numVisor = (number * number).toString();
+        updateView(); // Update the view after squaring
     }
 
     clearEntry() {
         this.numVisor = '0';
         this.ptDecimal = false;
+        updateView(); // Update the view after clearing entry
     }
 
     percentage() {
         if (this.errorState) return;
         let number = parseFloat(this.numVisor);
         this.numVisor = (number / 100).toString();
+        updateView(); // Update the view after calculating percentage
     }
     
     equal(){
         if(this.errorState) return;
         let num1 = parseFloat(this.memoriaTemp);
-        let num2 = parseFloat(this.showVisor);
+        let num2 = parseFloat(this.showVisor());
         let answer = 0;
-        switch(this.opAtual) {
+        switch(this.atualOp) {
             case this.op.SUM:
                 answer = num1 + num2;
                 break;
@@ -119,15 +124,16 @@ class calc {
                 answer = num1 * num2;
                 break;
             case this.op.DIV:
-                if(num == 0) {
+                if(num2 === 0) {
                     this.errorState = true;
                     this.numVisor = 'ERROR!';
+                    updateView();
                     return;
                 }
                 answer = num1 / num2;
                 break;
         }
-        this.opAtual = this.op.NOP;
+        this.atualOp = this.op.NOP;
         this.ptDecimal = false;
         this.secondStart = false;
         this.memoriaTemp = '';
@@ -141,70 +147,66 @@ class calc {
     keyMplus() {
         if(this.errorState) return;
         this.memoria += parseFloat(this.numVisor);
+        updateView(); // Update the view after adding to memory
     }
 
     keyMminus(){
         if(this.errorState) return;
         this.memoria -= parseFloat(this.numVisor);
+        updateView(); // Update the view after subtracting from memory
     }
 
     keyMR(){
         if(this.errorState) return;
         this.numVisor = String(this.memoria);
+        updateView(); // Update the view after recalling from memory
     }
 
     keyMC(){
         if(this.errorState) return;
         this.memoria = 0;
+        updateView(); // Update the view after clearing memory
     }
-
 }
 
-let calc = new calc();
+let calculator = new Calculator();
 
 let updateView = () => {
-    document.getElementById('screen').innerHTML = calc.showVisor();
+    document.getElementById('visor-id').innerHTML = calculator.showVisor();
 }
 
 let digit = (dig) =>  {
-    if(calcualdora) {
-        calc.insertDigit(dig);
-        updateView();
-    }
-
+    calculator.insertDigit(dig);
+    updateView();
 }
 
 let defineOp = (op) => {
-    if(calc.atualOp != calc.op.NOP) {
-        equal();
-        updateView();
+    if(calculator.atualOp !== calculator.op.NOP) {
+        calculator.equal();
     }
-    calc.defineOperation(op);
+    calculator.defineOperation(op);
 }
 
 let keyCE = () => {
-    calc.keyCE();
-    updateView();
+    calculator.keyCE();
 }
 
 let keyEqual = () => {
-    calc.equal();
-    updateView();
+    calculator.equal();
 }
 
 let keyMR = () => {
-    calc.keyMR();
-    updateView();
+    calculator.keyMR();
 }
 
 let keyMminus = () => {
-    calc.keyMminus();
+    calculator.keyMminus();
 }
 
 let keyMplus = () => {
-    calc.keyMplus();
+    calculator.keyMplus();
 }
 
 let keyMC = () => {
-    calc.keyMC();
+    calculator.keyMC();
 }

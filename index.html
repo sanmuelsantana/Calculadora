@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="shortcut icon" href="images/Favicon/32x.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div onclick="keyOn()" class="key-special">ON</div>
+        <div onclick="keyOff()" class="key-special">OFF</div>
+
+        <div id="visor-id" class="visor">
+            0
+        </div>
+
+        <div onclick="keyMS()" class="">MS</div>
+        <div onclick="keyMC()" class="">MC</div>
+        <div onclick="keyMR()" class="">MR</div>
+        <div onclick="keyMplus()" class="">M+</div>
+        <div onclick="keyMminus()" class="">M-</div>
+
+        <div class="container-keys">
+
+            <div onclick="defineOp('%')" class="key-special">%</div>
+            <div onclick="keyCE()" class="key-special">CE</div>
+            <div onclick="keyCE()" class="key-special">C</div>
+            <div onclick="defineOp('INV')" class="key-special"><img src="images/Button/Delete.png" style="width: 60px; height: 40px;"></div>
+            
+            <div></div>
+            <div onclick="defineOp('SQUARE')" class="key-special">x<sup>2</sup></div>
+            <div></div>
+            
+            <div onclick="defineOp('/') " class="key-special">/</div>
+
+            <div onclick="digit('7')" class="keys">7</div>
+            <div onclick="digit('8')" class="keys">8</div>
+            <div onclick="digit('9')" class="keys">9</div>
+            <div onclick="defineOp('*')" class="key-special">*</div>
+
+            <div onclick="digit('4')" class="keys">4</div>
+            <div onclick="digit('5')" class="keys">5</div>
+            <div onclick="digit('6')" class="keys">6</div>
+            <div onclick="defineOp('-')" class="key-special">-</div>
+
+            <div onclick="digit('1')" class="keys">1</div>
+            <div onclick="digit('2')" class="keys">2</div>
+            <div onclick="digit('3')" class="keys">3</div>
+            <div onclick="defineOp('+')" class="key-special">+</div>
+
+            <div onclick="defineOp('INV')" class="key-special"><img src="images/Button/Invert.png" style="width: 60px; height: 40px;"></div>
+            <div onclick="digit('0')" class="keys">0</div>
+            <div onclick="digit('.') " class="keys">,</div>
+            <div onclick="keyEqual()" class="key-special">=</div>
+
+        </div>
+    </div>
+
+    <script src="/scripts/script.js"></script>
+</body>
+</html>
