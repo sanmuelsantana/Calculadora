@@ -47,7 +47,7 @@ class Calculator {
         } else {
             this.numVisor += dig;
         }
-        updateView(); // Update the view after inserting a digit
+        updateView();
     }
 
     defineOperation(op){
@@ -85,27 +85,27 @@ class Calculator {
         if (this.errorState) return;
         let number = parseFloat(this.numVisor);
         this.numVisor = (-number).toString();
-        updateView(); // Update the view after inverting sign
+        updateView(); 
     }
 
     square() {
         if (this.errorState) return;
         let number = parseFloat(this.numVisor);
         this.numVisor = (number * number).toString();
-        updateView(); // Update the view after squaring
+        updateView();
     }
 
     clearEntry() {
         this.numVisor = '0';
         this.ptDecimal = false;
-        updateView(); // Update the view after clearing entry
+        updateView();
     }
 
     percentage() {
         if (this.errorState) return;
         let number = parseFloat(this.numVisor);
         this.numVisor = (number / 100).toString();
-        updateView(); // Update the view after calculating percentage
+        updateView();
     }
     
     equal(){
@@ -142,30 +142,41 @@ class Calculator {
 
     keyCE() {
         this.clearEntry();
+        this.errorState = false;
     }
 
     keyMplus() {
         if(this.errorState) return;
         this.memoria += parseFloat(this.numVisor);
-        updateView(); // Update the view after adding to memory
+        updateView();
     }
 
     keyMminus(){
         if(this.errorState) return;
         this.memoria -= parseFloat(this.numVisor);
-        updateView(); // Update the view after subtracting from memory
+        updateView();
     }
 
     keyMR(){
         if(this.errorState) return;
         this.numVisor = String(this.memoria);
-        updateView(); // Update the view after recalling from memory
+        updateView();
     }
 
     keyMC(){
         if(this.errorState) return;
         this.memoria = 0;
-        updateView(); // Update the view after clearing memory
+        updateView(); 
+    }
+
+    backspace() {
+        if (this.errorState) return;
+        if (this.numVisor.length === 1 || (this.numVisor.length === 2 && this.numVisor.startsWith('-'))) {
+            this.numVisor = '0';
+        } else {
+            this.numVisor = this.numVisor.slice(0, -1); // Remove apenas o último dígito
+        }
+        updateView();
     }
 }
 
@@ -189,14 +200,17 @@ let defineOp = (op) => {
 
 let keyCE = () => {
     calculator.keyCE();
+    updateView();
 }
 
 let keyEqual = () => {
     calculator.equal();
+    updateView();
 }
 
 let keyMR = () => {
     calculator.keyMR();
+    updateView();
 }
 
 let keyMminus = () => {
@@ -209,4 +223,8 @@ let keyMplus = () => {
 
 let keyMC = () => {
     calculator.keyMC();
+}
+
+let keyBackspace = () => {
+    calculator.backspace();
 }
