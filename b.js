@@ -8,7 +8,6 @@ class Calculator {
         this.ptDecimal = false;
         this.memoria = 0;
         this.atualOp = '';
-
     }
 
     showVisor() {
@@ -159,6 +158,24 @@ class Calculator {
         updateView();
     }
 
+    toggleOn() {
+        this.powerOn = true;
+        updateView();
+    }
+
+    toggleOff() {
+        this.powerOn = false;
+        this.clearAll();
+        updateView();
+    }
+
+    clearEntry() {
+        if (!this.powerOn || this.errorState) return;
+        this.numVisor = '0';
+        this.ptDecimal = false;
+        updateView();
+    }
+
     clearAll() {
         if (!this.powerOn || this.errorState) return;
         this.numVisor = '0';
@@ -168,19 +185,6 @@ class Calculator {
         this.ptDecimal = false;
         this.atualOp = '';
         updateView();
-    }
-
-    on() {
-        this.powerOn = true;
-        updateView();
-    }
-
-    off() {
-        this.clearAll(); 
-        this.keyMC();
-        this.numVisor = 'OFF'; 
-        updateView();
-        this.powerOn = false;
     }
 }
 
@@ -235,10 +239,11 @@ let keyC = () => {
     updateView();
 }
 
-let keyOn = () => {
-    calculator.on();
+
+let toggleOn = () => {
+    calculator.toggleOn();
 }
 
-let keyOff = () => {
-    calculator.off();
+let toggleOff = () => {
+    calculator.toggleOff();
 }
