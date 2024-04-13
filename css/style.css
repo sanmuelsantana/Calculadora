@@ -1,0 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'PixelArt';
+    src: url('/Calculator/fonts/pixel.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'DisplayImage';
+    src: url('/Calculator/fonts/digital.ttf') format('truetype');
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: 'PixelArt', 'Times New Roman', Times, serif;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 450px;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.container-keys {
+    margin: 0;
+    padding: 10px;
+    width: 90%;
+    background-color: #f2f2f2;
+    border: 6px solid #cccccc;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.keys {
+    padding: 8px;
+    background-color: #ffffff;
+    color: #333333;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 2em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.key:active {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 6px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.key-special {
+    padding: 8px;
+    background-color: #4caf50;
+    color: #ffffff;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 2em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.key-special:active {
+    padding-top: 10px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 6px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.visor {
+    color: #ff4081;
+    background-color: #333333;
+    text-align: right;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    padding-right: 40px;
+    border: 8px solid #ff4081;
+    border-radius: 20px;
+    font-size: 3.5em;
+    font-family: 'DisplayImage', Courier, monospace;
+    font-weight: 700;
+    text-shadow: 2px 2px 15px rgba(255, 64, 129, 0.5);
+    box-shadow: inset 15px 10px 20px 20px rgba(0, 0, 0, 0.1);
+}
