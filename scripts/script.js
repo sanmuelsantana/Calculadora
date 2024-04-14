@@ -18,18 +18,18 @@ class Calculator {
     insertDigit(dig) {
         if (!this.powerOn || this.errorState) return;
         if (dig !== '.' && (isNaN(parseInt(dig)) || this.numVisor.length >= 10)) return;
-        
+
         if (!this.secondStart && this.atualOp) {
             this.secondStart = true;
             this.ptDecimal = false;
             this.numVisor = '0';
         }
-        
+
         if (dig === '.') {
             if (this.ptDecimal) return;
             this.ptDecimal = true;
         }
-        
+
         if (this.numVisor === '0') {
             this.numVisor = dig === '.' ? '0.' : dig;
         } else {
@@ -40,12 +40,12 @@ class Calculator {
 
     defineOperation(op) {
         if (!this.powerOn || this.errorState) return;
-        
+
         if (op === 'CE') {
             this.clearEntry();
             return;
         }
-        
+
         if (op === '+' || op === '-' || op === '*' || op === '/') {
             if (this.atualOp) {
                 this.equal();
@@ -54,7 +54,7 @@ class Calculator {
             this.atualOp = op;
             this.secondStart = false;
             this.ptDecimal = false;
-        } 
+        }
         if (op === 'INV') {
             this.invertSign();
         }
@@ -92,7 +92,7 @@ class Calculator {
             default:
                 return;
         }
-        this.numVisor = answer.toString().slice(0, 12);
+        this.numVisor = answer.toString().slice(0, 10);
         this.atualOp = '';
         this.ptDecimal = false;
         this.secondStart = false;
@@ -172,16 +172,32 @@ class Calculator {
 
     on() {
         this.powerOn = true;
+        this.clearAll();
         updateView();
     }
 
     off() {
-        this.clearAll(); 
+        this.clearAll();
         this.keyMC();
-        this.numVisor = 'OFF'; 
+        this.numVisor = 'OFF';
         updateView();
         this.powerOn = false;
     }
+
+    raiz() {
+        if (!this.powerOn || this.errorState) return;
+        const num = parseFloat(this.numVisor);
+        if (num < 0) {
+            this.errorState = true;
+            this.numVisor = 'ERROR!';
+            updateView();
+            return;
+        }
+        this.numVisor = Math.sqrt(num).toString().slice(0, 12);
+        updateView();
+    }
+
+
 }
 
 let calculator = new Calculator();
@@ -242,3 +258,8 @@ let keyOn = () => {
 let keyOff = () => {
     calculator.off();
 }
+
+let raiz = () => {
+    calculator.raiz();
+}
+

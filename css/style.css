@@ -14,8 +14,8 @@
 }
 
 body {
-    background-color: #f2f2f2;
-    font-family: 'PixelArt', 'Times New Roman', Times, serif;
+    background-color: #0e5c8f;
+    font-family: 'PixelArt';
 }
 
 .container {
@@ -41,15 +41,22 @@ body {
     grid-template-columns: repeat(4, 1fr);
 }
 
+
 .keys {
     padding: 8px;
-    background-color: #ffffff;
+    background-color: #ffee58;
     color: #333333;
     margin: 10px;
     border-radius: 10px;
     font-size: 2em;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'PixelArt';
     box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    cursor: pointer;
+}
+
+.keys:hover {
+    background-color: #fff59d;
 }
 
 .keys:active {
@@ -58,17 +65,27 @@ body {
     padding-left: 10px;
     padding-right: 6px;
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
 }
 
 .key-special {
+    flex: 1;
+    margin: 10px;
     padding: 8px;
-    background-color: #4caf50;
+    background-color: #ff5252;
     color: #ffffff;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 15px;
     font-size: 2em;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'PixelArt';
     box-shadow: 2px 2px 3px 3px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    cursor: pointer;
+
+}
+
+.key-special:hover {
+    background-color: #ff1744;
 }
 
 .key-special:active {
@@ -77,6 +94,13 @@ body {
     padding-left: 10px;
     padding-right: 6px;
     box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}
+
+.specialAlign {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .visor {
@@ -90,13 +114,8 @@ body {
     border: 8px solid #ff4081;
     border-radius: 20px;
     font-size: 3.5em;
-    font-family: 'DisplayImage', Courier, monospace;
+    font-family: 'DisplayImage';
     font-weight: 700;
     text-shadow: 2px 2px 15px rgba(255, 64, 129, 0.5);
     box-shadow: inset 15px 10px 20px 20px rgba(0, 0, 0, 0.1);
-}
-
-.visor:disabled {
-    background-color: #111111;
-    border: 8px solid #000000;
 }
